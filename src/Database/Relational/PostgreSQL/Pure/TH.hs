@@ -30,8 +30,8 @@ import           Data.Maybe                             (fromMaybe, listToMaybe)
 import           Data.String                            (fromString)
 
 import           Database.HDBC                          (SqlValue)
-import           Database.PostgreSQL.Pure               (ColumnInfo, Connection, FromRecord, Oid, ToRecord, disconnect,
-                                                         parse, sync)
+import           Database.PostgreSQL.Pure               (ColumnInfo, Connection, FromRecord, Length, Oid, ToRecord,
+                                                         disconnect, parse, sync)
 
 import           Language.Haskell.TH                    (Dec, Name, Q, TyLit (NumTyLit), Type (AppT, ConT, LitT), TypeQ,
                                                          runIO)
@@ -50,7 +50,6 @@ import           Database.Schema.PostgreSQL.Pure.Driver (Driver, driverConfig, e
                                                          getPrimaryKey, takeLogs)
 
 import           Data.Tuple.Homotuple                   (IsHomolisttuple, IsHomotupleItem)
-import           Data.Tuple.List                        (Length)
 import           GHC.TypeLits                           (KnownNat)
 
 defineInstancesForRecord :: TypeQ   -- ^ Record type constructor.
