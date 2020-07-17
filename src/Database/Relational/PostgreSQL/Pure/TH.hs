@@ -30,11 +30,14 @@ import           Data.Maybe                             (fromMaybe, listToMaybe)
 import           Data.String                            (fromString)
 
 import           Database.HDBC                          (SqlValue)
-import           Database.PostgreSQL.Pure               (ColumnInfo, Connection, Oid, disconnect, parse, sync)
+import           Database.PostgreSQL.Pure               (ColumnInfo, Connection, FromRecord, Oid, ToRecord, disconnect,
+                                                         parse, sync)
 
-import           Language.Haskell.TH                    (Dec, Name, Q, Type (AppT, ConT), TypeQ, runIO)
+import           Language.Haskell.TH                    (Dec, Name, Q, TyLit (NumTyLit), Type (AppT, ConT, LitT), TypeQ,
+                                                         runIO)
 import           Language.Haskell.TH.Lib.Extra          (reportError, reportWarning)
 import           Language.Haskell.TH.Name.CamelCase     (varCamelcaseName)
+import           Language.Haskell.TH.Syntax             (returnQ)
 
 import           Database.Record.TH                     (defineSqlPersistableInstances, recordTemplate)
 import           Database.Relational                    (Config, Relation, defaultConfig, enableWarning, nameConfig,
@@ -49,6 +52,18 @@ import           Database.Schema.PostgreSQL.Pure.Driver (Driver, driverConfig, e
 import           Data.Tuple.Homotuple                   (IsHomolisttuple, IsHomotupleItem)
 import           Data.Tuple.List                        (Length)
 import           GHC.TypeLits                           (KnownNat)
+
+defineInstancesForRecord :: TypeQ   -- ^ Record type constructor.
+                         -> Q [Dec] -- ^ Instance declarations.
+defineInstancesForRecord typeCon = do
+  [d| instance FromRecord $typeCon
+      instance ToRecord $typeCon
+    |]
+
+defineInstancesForLength :: TypeQ -> Int -> Q [Dec]
+defineInstancesForLength typeCon len = do
+  let len' = returnQ $ LitT $ NumTyLit $ toInteger len
+  [d| type instance Length $typeCon = $len' |]
 
 -- | Generate all persistable templates against defined record like type constructor.
 makeRelationalRecord' :: Config
@@ -90,7 +105,10 @@ defineTableDefault :: Config            -- ^ Configuration to generate query wit
                    -> Q [Dec]           -- ^ Result declaration
 defineTableDefault config schema table columns derives primary notNull = do
   modelD <- Relational.defineTable config schema table columns derives primary notNull
-  return modelD
+  let typeCon = fst $ recordTemplate (recordConfig $ nameConfig config) schema table
+  recordD <- defineInstancesForRecord typeCon
+  lengthD <- defineInstancesForLength typeCon $ length columns
+  return $ modelD ++ recordD ++ lengthD
 
 tableAlongWithSchema :: IO Connection     -- ^ Connect action to system catalog database
                      -> Driver            -- ^ Driver definition
