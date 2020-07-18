@@ -24,12 +24,10 @@ module Database.Relational.PostgreSQL.Pure.TH (
   ) where
 
 import           Control.Monad                          (void, when)
-import           Data.Functor.ProductIsomorphic.TH      (reifyRecordType)
 import qualified Data.Map                               as Map
 import           Data.Maybe                             (fromMaybe, listToMaybe)
 import           Data.String                            (fromString)
 
-import           Database.HDBC                          (SqlValue)
 import           Database.PostgreSQL.Pure               (ColumnInfo, Connection, FromRecord, Length, Oid, ToRecord,
                                                          disconnect, parse, sync)
 
@@ -39,7 +37,7 @@ import           Language.Haskell.TH.Lib.Extra          (reportError, reportWarn
 import           Language.Haskell.TH.Name.CamelCase     (varCamelcaseName)
 import           Language.Haskell.TH.Syntax             (returnQ)
 
-import           Database.Record.TH                     (defineSqlPersistableInstances, recordTemplate)
+import           Database.Record.TH                     (recordTemplate)
 import           Database.Relational                    (Config, Relation, defaultConfig, enableWarning, nameConfig,
                                                          recordConfig, relationalQuery_, untypeQuery,
                                                          verboseAsCompilerWarning)
@@ -68,11 +66,8 @@ defineInstancesForLength typeCon len = do
 makeRelationalRecord' :: Config
                       -> Name    -- ^ Type constructor name
                       -> Q [Dec] -- ^ Result declaration
-makeRelationalRecord' config recTypeName = do
-  rr <- Relational.makeRelationalRecordDefault' config recTypeName
-  (((typeCon, avs), _), _) <- reifyRecordType recTypeName
-  ps <- defineSqlPersistableInstances [t| SqlValue |] typeCon avs
-  return $ rr ++ ps
+makeRelationalRecord' config recTypeName =
+  Relational.makeRelationalRecordDefault' config recTypeName
 
 -- | Generate all persistable templates against defined record like type constructor.
 makeRelationalRecord :: Name    -- ^ Type constructor name
@@ -86,12 +81,8 @@ defineTableDefault' :: Config            -- ^ Configuration to generate query wi
                     -> [(String, TypeQ)] -- ^ List of column name and type
                     -> [Name]            -- ^ Derivings
                     -> Q [Dec]           -- ^ Result declaration
-defineTableDefault' config schema table columns derives = do
-  modelD <- Relational.defineTableTypesAndRecord config schema table columns derives
-  sqlvD <- defineSqlPersistableInstances [t| SqlValue |]
-           (fst $ recordTemplate (recordConfig $ nameConfig config) schema table)
-           []
-  return $ modelD ++ sqlvD
+defineTableDefault' config schema table columns derives =
+  Relational.defineTableTypesAndRecord config schema table columns derives
 
 -- | Generate all HDBC templates about table.
 defineTableDefault :: Config            -- ^ Configuration to generate query with

@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: e6e06af2f81fd5c1327358d2102be610f987cb3e0100ef74de64f3fb6a76e547
+-- hash: 4d90480e898215202e97e3985f51aa15ba5080e2f3af9dc5acd5f9a6a8b1dd2b
 
 name:           relational-query-postgresql-pure
 version:        0.1.0.0
@@ -39,9 +39,7 @@ library
       src
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wmissing-exported-signatures -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints -Wno-name-shadowing -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-import-lists -Wmonomorphism-restriction
   build-depends:
-      HDBC
-    , Only
-    , base >=4 && <5
+      base >=4 && <5
     , containers
     , dlist
     , homotuple >=0.1.2.0

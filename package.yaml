@@ -36,8 +36,6 @@ library:
     - -Wmissing-import-lists
     - -Wmonomorphism-restriction
   dependencies:
-    - HDBC
-    - Only
     - containers
     - dlist
     - homotuple >= 0.1.2.0
