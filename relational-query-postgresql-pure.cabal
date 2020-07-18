@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 89378bd34b17a07ca7e04f4abc58ef676ab42e969ba1cce5f7d4bdb4681e7abd
+-- hash: e6e06af2f81fd5c1327358d2102be610f987cb3e0100ef74de64f3fb6a76e547
 
 name:           relational-query-postgresql-pure
 version:        0.1.0.0
@@ -49,7 +49,7 @@ library
     , names-th
     , persistable-record
     , postgresql-placeholder-converter
-    , postgresql-pure
+    , postgresql-pure >=0.2.2.0
     , product-isomorphic
     , relational-query
     , relational-schemas

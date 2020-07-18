@@ -26,12 +26,16 @@ packages:
   original:
     hackage: single-tuple-0.1.1.0@rev:0
 - completed:
-    hackage: postgresql-pure-0.2.2.0@sha256:76e08777221e9eea2e37bcf202c382c9a9bda833bdd6ddfc19d4823d76aee8a0,12489
+    size: 74594
+    url: https://github.com/iij-ii/postgresql-pure/archive/fd61fef657c5b5597e918066204a720069ad24d0.tar.gz
+    name: postgresql-pure
+    version: 0.2.1.0
+    sha256: 523b7e5e11ea7749effab55bc6586e05f4c8352379ecf3fe67a497095bfa3f43
     pantry-tree:
-      size: 3773
-      sha256: 17225290a034ca5fc7279a30da52580355918069a58533173c8d7109da85e27a
+      size: 4678
+      sha256: c38e1b80c8c84b8e89d3c0c47978e7216d47ea4fcee68d17cded1a1b675c59e0
   original:
-    hackage: postgresql-pure-0.2.2.0@rev:0
+    url: https://github.com/iij-ii/postgresql-pure/archive/fd61fef657c5b5597e918066204a720069ad24d0.tar.gz
 - completed:
     hackage: postgresql-placeholder-converter-0.1.0.0@sha256:cc5ae9483bd8c965fd7db8a3e8e406d75b446318abecfdce5f2330bf220b8a56,2340
     pantry-tree:
@@ -40,15 +44,19 @@ packages:
   original:
     hackage: postgresql-placeholder-converter-0.1.0.0@rev:1
 - completed:
-    hackage: HDBC-postgresql-2.3.2.7@sha256:93d8e3c3d2dc9291a10f28ae3f8d0604a55ef47298ed43003a4d16f3d9905bae,3228
+    size: 25744
+    url: https://github.com/tfausak/hdbc-postgresql/archive/90372d22e4ec416faa00b18a715303027fa1128e.tar.gz
+    name: HDBC-postgresql
+    version: 2.3.2.7
+    sha256: c6a76948a8272e5e48948a433cde76e0a5a04a8681b8564cf4b166df13d2b5cb
     pantry-tree:
-      size: 1740
-      sha256: 07bfba988402849f447025b324f2993ea88ac0ec4f7dd4b86942644e2e239d45
+      size: 1789
+      sha256: 692b60c49e24e6700a654a1ce67d12cfa9d8e6ab49be9771f9bca27a630155d2
   original:
-    hackage: HDBC-postgresql-2.3.2.7@sha256:93d8e3c3d2dc9291a10f28ae3f8d0604a55ef47298ed43003a4d16f3d9905bae,3228
+    url: https://github.com/tfausak/hdbc-postgresql/archive/90372d22e4ec416faa00b18a715303027fa1128e.tar.gz
 snapshots:
 - completed:
-    size: 496112
-    url: https://raw.githubusercontent.com/commercialhaskell/stackage-snapshots/master/lts/15/15.yaml
-    sha256: 86169722ad0056ffc9eacc157ef80ee21d7024f92c0d2961c89ccf432db230a3
-  original: lts-15.15
+    size: 510461
+    url: https://raw.githubusercontent.com/commercialhaskell/stackage-snapshots/master/nightly/2020/7/13.yaml
+    sha256: cac791faa45f897561f1157607aaf682ab1c7c48bda8266be3ab909d77b7c11a
+  original: nightly-2020-07-13

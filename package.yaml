@@ -38,7 +38,7 @@ library:
   dependencies:
     - containers
     - persistable-record
-    - postgresql-pure
+    - postgresql-pure >= 0.2.2.0
     - relational-schemas
     - template-haskell
     - transformers
