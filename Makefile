@@ -32,15 +32,15 @@ test: test-db-ghc-8.6 test-db-ghc-8.8 test-db-nightly
 
 .PHONY: test-db-ghc-8.6
 test-db-ghc-8.6: build-ghc-8.6 src
-	stack --stack-yaml stack-ghc-8.6.yaml build --ghc-options -Werror relational-query-postgresql-pure:test:db
+	stack --stack-yaml stack-ghc-8.6.yaml build --ghc-options -Werror relational-query-postgresql-pure:test:db $(STACK_OPTIONS)
 
 .PHONY: test-db-ghc-8.8
 test-db-ghc-8.8: build-ghc-8.8 src
-	stack --stack-yaml stack-ghc-8.8.yaml build --ghc-options -Werror relational-query-postgresql-pure:test:db
+	stack --stack-yaml stack-ghc-8.8.yaml build --ghc-options -Werror relational-query-postgresql-pure:test:db $(STACK_OPTIONS)
 
 .PHONY: test-db-nightly
 test-db-nightly: build-nightly src
-	stack --stack-yaml stack-nightly.yaml --resolver nightly build --ghc-options -Werror relational-query-postgresql-pure:test:db
+	stack --stack-yaml stack-nightly.yaml --resolver nightly build --ghc-options -Werror relational-query-postgresql-pure:test:db $(STACK_OPTIONS)
 
 .PHONY: format
 format:
