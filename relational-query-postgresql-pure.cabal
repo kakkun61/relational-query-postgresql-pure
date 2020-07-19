@@ -4,10 +4,10 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 4d90480e898215202e97e3985f51aa15ba5080e2f3af9dc5acd5f9a6a8b1dd2b
+-- hash: a388ed7b73f07b6922993e1a1f138c7ac8ce852d352fe1c90593e4136767d3c1
 
 name:           relational-query-postgresql-pure
-version:        0.1.0.0
+version:        0.1.1.0
 synopsis:       The connector of relational-record and postgresql-pure.
 description:    You can use postgresql-pure as the backend of relational-record without the HDBC interface.
 category:       Database
